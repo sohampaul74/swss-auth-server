@@ -1,0 +1,46 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+/.mvn/wrapper/MavenWrapperDownloader.java
+/.mvn/wrapper/maven-wrapper.jar
+/.mvn/wrapper/maven-wrapper.properties
+/auth-server-2021-05-20.0.log
+/auth-server-2021-05-24.0.log
+/auth-server-2021-05-25.0.log
+/auth-server-2021-05-26.0.log
+/auth-server.log
+/mvnw
+/mvnw.cmd
+/test-auth-server-2021-05-19.0.log
+/test-auth-server-2021-05-20.0.log
+/test-auth-server.log

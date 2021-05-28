@@ -1,0 +1,15 @@
+logging:  pattern:    rolling-file-name: ${spring.application.name}-%d{yyyy-MM-dd}.%i.log  file:     name: ${spring.application.name}.log    max-size: 10MB    path: C:/Users/riddh/swss-logs/  level:    root: info    '[org.springframework.web]': debug    '[org.springframework.security]': debug    #'[org.hibernate]': debugserver:  port: 8081
+spring:  profiles:    active: deployable---spring:  profiles: deployable  application:
+    name: auth-server
+    
+  #datasource configuration
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/swss-auth
+    username: root
+    password: tooroot
+  jpa:    open-in-view: true
+    properties:      hibernate:
+        format_sql:true
+        show_sql:true
+    hibernate:      naming:        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl---        spring:  profiles: test  application:    name: test-auth-server  #datasource configuration  data:    jpa:      repositories:        bootstrap-mode: default  h2:    console:      enabled: true      path: /h2  datasource:    initialization-mode: always    driver-class-name: org.h2.Driver    url: jdbc:h2:mem:testdb    username: sa    password:     schema: classpath:/schema.sql    data: classpath:/data.sql  jpa:    open-in-view: true    properties:      hibernate:        format_sql:true        show_sql:true        dialect:org.hibernate.dialect.H2Dialect    hibernate:      ddl-auto: none      naming:        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
