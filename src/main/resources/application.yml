@@ -1,5 +1,5 @@
-logging:  pattern:    rolling-file-name: ${spring.application.name}-%d{yyyy-MM-dd}.%i.log  file:     name: ${spring.application.name}.log    max-size: 10MB    path: C:/Users/riddh/swss-logs/  level:    root: info    '[org.springframework.web]': debug    '[org.springframework.security]': debug    #'[org.hibernate]': debugserver:  port: 8081
-spring:  profiles:    active: deployable---spring:  profiles: deployable  application:
+logging:  pattern:    rolling-file-name: ${spring.application.name}-%d{yyyy-MM-dd}.%i.log  file:     name: ${spring.application.name}.log    max-size: 10MB    path: C:/Users/riddh/swss-logs/  level:    root: info    '[org.springframework.web]': debug    '[org.springframework.security]': debug    '[com.netflix]': debug    #'[org.hibernate]': debugserver:  port: 8081
+spring:  profiles:    active: deployable---spring:  profiles: deployable  application:
     name: auth-server
     
   #datasource configuration

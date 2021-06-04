@@ -44,3 +44,4 @@ build/
 /test-auth-server-2021-05-19.0.log
 /test-auth-server-2021-05-20.0.log
 /test-auth-server.log
+/*.log

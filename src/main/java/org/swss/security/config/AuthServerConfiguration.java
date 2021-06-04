@@ -1,5 +1,7 @@
 package org.swss.security.config;
 
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +14,24 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.ApprovalStoreUserApprovalHandler;
 import org.springframework.security.oauth2.provider.approval.DefaultUserApprovalHandler;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
+import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javassist.expr.Instanceof;
 
@@ -40,6 +49,9 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
 	
 	@Autowired
 	private UserDetailsService localUserDetailsService;
+	
+	@Autowired
+	private CustomAccessTokenCoverter customAccessTokenCoverter;
 	
 	@Bean
 	public TokenStore tokenStore() {
@@ -63,7 +75,8 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.approvalStore(approvalStore()).tokenStore(tokenStore()).authenticationManager(authenticationManager).userDetailsService(localUserDetailsService);
+		endpoints.accessTokenConverter(customAccessTokenCoverter)
+			.approvalStore(approvalStore()).tokenStore(tokenStore()).authenticationManager(authenticationManager).userDetailsService(localUserDetailsService);
 	}
-	
+
 }
